@@ -1,6 +1,6 @@
 from telegram import ReplyKeyboardMarkup, Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
-from зарядка import start_workout, get_handlers
+from sport_tracker import start_workout, get_handlers
 from mood_tracker import setup as setup_mood_tracker
 from sleep_tracker import setup as setup_sleep_tracker
 
