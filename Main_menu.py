@@ -65,25 +65,20 @@ async def handle_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await start(update, context)
 
 
-
 def main():
-    load_dotenv()
-    TOKEN = os.getenv("BOT_TOKEN")
-    application = Application.builder().token(TOKEN).build()
+    application = Application.builder().token("7560481764:AAGA0k9hG-GBkZAgnXX3kh8GNXCu0pbK018").build()
 
     application.add_handlers(get_handlers())
 
     setup_mood_tracker(application)
     setup_sleep_tracker(application)
-    
+
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_menu))
 
     application.run_polling()
 
 
-
 if __name__ == "__main__":
     main()
-
 
