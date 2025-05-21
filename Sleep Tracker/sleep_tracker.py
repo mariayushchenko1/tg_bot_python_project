@@ -287,6 +287,9 @@ def init_db():
 def setup(application):
     init_db()  # инициализация базы данных
     # регистрация обработчиков сообщений
+    application.add_handler(
+        MessageHandler(filters.Regex("^Трекер сна$"), start_sl)
+    )
     application.add_handler(CommandHandler("starting", start_sl))
     application.add_handler(
         MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text)
