@@ -23,6 +23,10 @@ main_kb = ReplyKeyboardMarkup(
     [["Регистрация сна", "Просмотреть отчёт"], ["Назад"]], resize_keyboard=True
 )
 
+back_kb = ReplyKeyboardMarkup(
+    [["Назад"]], resize_keyboard=True
+)
+
 
 # команда /start
 async def start_sl(update: Update, context: ContextTypes.DEFAULT_TYPE):
