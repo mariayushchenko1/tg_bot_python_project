@@ -20,7 +20,7 @@ SET_MORNING, SET_EVENING = range(2)
 
 # клавиатура главного меню
 main_kb = ReplyKeyboardMarkup(
-    [["Регистрация сна", "Просмотреть отчёт"], ["Назад"]], resize_keyboard=True
+    [["Регистрация сна", "Просмотреть отчёт"]], resize_keyboard=True
 )
 
 back_kb = ReplyKeyboardMarkup(
