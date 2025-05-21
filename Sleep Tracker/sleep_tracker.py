@@ -9,8 +9,6 @@ from telegram.ext import (
 )
 import sqlite3
 import datetime
-import os
-from dotenv import load_dotenv
 
 # глобальные переменные
 DB_NAME = "sleep.db"
@@ -281,11 +279,11 @@ def setup(application):
     
     # для напоминаний
     notification_conv = ConversationHandler(
-        entry_points=[CommandHandler("напоминания", set_notifications)],
-        states={
-            SET_MORNING: [MessageHandler(filters.TEXT & ~filters.COMMAND, set_morning)],
-            SET_EVENING: [MessageHandler(filters.TEXT & ~filters.COMMAND, set_evening)],
-        },
-        fallbacks=[CommandHandler("отмена", cancel_notifications)],
+    entry_points=[CommandHandler("reminders", set_notifications)],
+    states={
+        SET_MORNING: [MessageHandler(filters.TEXT & ~filters.COMMAND, set_morning)],
+        SET_EVENING: [MessageHandler(filters.TEXT & ~filters.COMMAND, set_evening)],
+    },
+    fallbacks=[CommandHandler("cancel", cancel_notifications)],
     )
-    application.add_handler(notification_conv)
+
