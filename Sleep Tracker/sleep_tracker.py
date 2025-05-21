@@ -10,6 +10,9 @@ from telegram.ext import (
 import sqlite3
 import datetime
 
+# Токен бота - вставьте сюда ваш токен!
+TOKEN = "ваш токен"
+
 # глобальные переменные
 DB_NAME = "sleep.db"
 user_states = {}
@@ -61,7 +64,7 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             log_wake_time(user_id, wake_time)
             duration = get_last_sleep_duration(user_id)
             msg = (
-                f"Вы спали {round(duration, 2)} ч 💤"
+                f"Вы спали {round(duration, 2)} ч Ὂ4"
                 if duration
                 else "Не удалось рассчитать продолжительность сна."
             )
