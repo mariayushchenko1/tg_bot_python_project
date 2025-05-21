@@ -22,7 +22,7 @@ from telegram.ext import (
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Хдля хранения данных пользователя
+# для хранения данных пользователя
 user_data = {}
 
 
@@ -55,7 +55,7 @@ async def start_workout(update: Update, context: ContextTypes.DEFAULT_TYPE):  # 
     user_data[user_id] = WorkoutData()  # хранилище его данных
 
     await update.message.reply_text(  # асинхронно. Бот в ответ на соо пользователя присылает соо
-        "Выбери дни для зарядки:",
+        "Выберите дни для зарядки:",
         reply_markup=DAYS_KEYBOARD  # ReplyKeyboardMarkup. прикрепляем клавиатуру к соо
     )
 
@@ -67,11 +67,11 @@ async def process_days(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if text == "готово":
         if not user_data[user_id].selected_days:
-            await update.message.reply_text("Выбери хотя бы один день!")
+            await update.message.reply_text("Выберите хотя бы один день!")
             return  # если ничего не выбрано, то возврат, не переходит к напоминаниям
 
         await update.message.reply_text(  # данные о текущем соо + ответтное соо
-            f"Ты выбрал тренировки в: {', '.join(user_data[user_id].selected_days)}",
+            f"Вы выбрали тренировки в: {', '.join(user_data[user_id].selected_days)}",
             reply_markup=MAIN_KEYBOARD
         )
 
@@ -110,14 +110,14 @@ async def send_reminder(context: CallbackContext):
     user_id = context.job.context
     await context.bot.send_message(
         user_id,
-        "Завтра день зарядки! Приготовься к тренировке!"
+        "Завтра день зарядки! Приготовьтесь к тренировке!"
     )
 
 
 # вопрос о выполнении зарядки
 async def ask_workout_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "Ты сделал сегодня зарядку?",
+        "Вы сделали сегодня зарядку?",
         reply_markup=YES_NO_KEYBOARD
     )
 
@@ -141,7 +141,7 @@ async def process_answer(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def show_stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     if user_id not in user_data or not user_data[user_id].completed:  # проверяем есть ли в словаре данные пользователя
-        await update.message.reply_text("У тебя еще нет статистики!")
+        await update.message.reply_text("У вас еще нет статистики!")
         return
 
     user = user_data[user_id]
@@ -151,11 +151,11 @@ async def show_stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # само сообщение от бота
     stats = (
-        "📊 Твоя статистика:\n"
+        "📊 Ваша статистика:\n"
         f"• Всего дней: {total}\n"
         f"• Выполнено: {done}\n"
         f"• Пропущено: {missed}\n\n"
-        "• Продолжай работать!"
+        "• Продолжайте работать!"
     )
 
     await update.message.reply_text(stats)

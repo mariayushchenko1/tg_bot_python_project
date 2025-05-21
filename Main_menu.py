@@ -40,7 +40,6 @@ async def handle_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if text == "Зарядка":
         await start_workout(update, context)
 
-
     elif text == "Трекер сна":
         await update.message.reply_text(
             "Вы в трекере сна",
@@ -66,7 +65,7 @@ async def handle_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def main():
-    application = Application.builder().token("ь").build()
+    application = Application.builder().token("7560481764:AAG44y5V-9GHO-fX8ZN05Xafo8jciiPKUug").build()
 
     application.add_handlers(get_handlers())
 
