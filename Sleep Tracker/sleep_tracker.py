@@ -25,7 +25,7 @@ main_kb = ReplyKeyboardMarkup(
 
 
 # команда /start
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def start_sl(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "Добро пожаловать в трекер сна!", reply_markup=main_kb
     )
@@ -278,7 +278,7 @@ def init_db():
 def setup(application):
     init_db()  # инициализация базы данных
     # регистрация обработчиков сообщений
-    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("starting", start_sl))
     application.add_handler(
         MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text)
     )
