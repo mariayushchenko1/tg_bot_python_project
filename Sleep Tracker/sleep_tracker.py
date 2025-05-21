@@ -20,11 +20,11 @@ SET_MORNING, SET_EVENING = range(2)
 
 # клавиатура главного меню
 main_kb = ReplyKeyboardMarkup(
-    ["Регистрация сна", "Просмотреть отчёт"], resize_keyboard=True
+    [["Регистрация сна", "Просмотреть отчёт"], ["Возврат в главное меню"]]resize_keyboard=True
 )
 
 back_kb = ReplyKeyboardMarkup(
-    ["Назад"], resize_keyboard=True
+    [["Регистрация сна", "Просмотреть отчёт"], ["Назад"]], resize_keyboard=True
 )
 
 
@@ -53,6 +53,9 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return await send_report(update, context)
         
     if text == "Назад":
+        return await start_sl(update, context)
+
+    if text == "Возврат в главное меню":
         return await start(update, context)
 
     state = user_states.get(user_id)
@@ -74,11 +77,11 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 if duration
                 else "Не удалось рассчитать продолжительность сна."
             )
-            await update.message.reply_text(msg, reply_markup=main_kb)
+            await update.message.reply_text(msg, reply_markup=back_kb)
             user_states.pop(user_id)
     else:
         await update.message.reply_text(
-            "Пожалуйста, выберите действие с клавиатуры.", reply_markup=main_kb
+            "Пожалуйста, выберите действие с клавиатуры.", reply_markup=back_kb
         )
 
 
@@ -90,7 +93,7 @@ async def send_report(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if today is None:
         return await update.message.reply_text(
-            "Пока нет данных за сегодня.", reply_markup=main_kb
+            "Пока нет данных за сегодня.", reply_markup=back_kb
         )
 
     diff = ""
@@ -104,7 +107,7 @@ async def send_report(update: Update, context: ContextTypes.DEFAULT_TYPE):
             diff = " То же самое, что и вчера!"
 
     await update.message.reply_text(
-        f"Сегодня вы спали {round(today, 2)} ч {diff}", reply_markup=main_kb
+        f"Сегодня вы спали {round(today, 2)} ч {diff}", reply_markup=back_kb
     )
 
 
