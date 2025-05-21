@@ -61,7 +61,7 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             log_wake_time(user_id, wake_time)
             duration = get_last_sleep_duration(user_id)
             msg = (
-                f"Вы спали {round(duration, 2)} ч Ὂ4"
+                f"Вы спали {round(duration, 2)} ч 💤"
                 if duration
                 else "Не удалось рассчитать продолжительность сна."
             )
@@ -271,19 +271,21 @@ def init_db():
     conn.commit()
     conn.close()
 
+
 def setup(application):
     init_db()  # инициализация базы данных
     # регистрация обработчиков сообщений
     application.add_handler(CommandHandler("start", start))
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
-    
-    # для напоминаний
-    notification_conv = ConversationHandler(
-    entry_points=[CommandHandler("reminders", set_notifications)],
-    states={
-        SET_MORNING: [MessageHandler(filters.TEXT & ~filters.COMMAND, set_morning)],
-        SET_EVENING: [MessageHandler(filters.TEXT & ~filters.COMMAND, set_evening)],
-    },
-    fallbacks=[CommandHandler("cancel", cancel_notifications)],
+    application.add_handler(
+        MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text)
     )
 
+    # для напоминаний
+    notification_conv = ConversationHandler(
+        entry_points=[CommandHandler("reminders", set_notifications)],
+        states={
+            SET_MORNING: [MessageHandler(filters.TEXT & ~filters.COMMAND, set_morning)],
+            SET_EVENING: [MessageHandler(filters.TEXT & ~filters.COMMAND, set_evening)],
+        },
+        fallbacks=[CommandHandler("cancel", cancel_notifications)],
+    )
