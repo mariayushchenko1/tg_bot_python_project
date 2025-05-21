@@ -44,9 +44,11 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if text == "Регистрация сна":
         return await handle_sleep(update, context)
-    elif text == "Просмотреть отчёт":
+        
+    if text == "Просмотреть отчёт":
         return await send_report(update, context)
-    elif text == "Назад":
+        
+    if text == "Назад":
         return await start(update, context)
 
     state = user_states.get(user_id)
