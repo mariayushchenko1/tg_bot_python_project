@@ -66,7 +66,7 @@ async def handle_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def main():
-    application = Application.builder().token("наш токен").build()
+    application = Application.builder().token("ь").build()
 
     application.add_handlers(get_handlers())
 
