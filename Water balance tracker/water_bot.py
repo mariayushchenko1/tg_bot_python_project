@@ -8,11 +8,6 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from datetime import datetime, time
 
-# место, куда нужно вставить токен, чтоб запустить бот
-
-bot = Bot(token="8184492646:AAEHCvAWHe6Ykxbs5Pw5IY9vOVL9L7sX2vE") # МЫ НЕ ГРУЗИМ ТОКЕН В ГИТХАБ
-dp = Dispatcher()
-
 # определение состояний (шагов, на которых находится пользователь)
 
 class WaterTracker(StatesGroup):
@@ -210,12 +205,3 @@ async def run_periodic_tasks():
         if now.hour == 0 and now.minute == 0:
             await daily_reset()
         await asyncio.sleep(60)
-
-# для запуска бота
-
-async def main():
-    asyncio.create_task(run_periodic_tasks())
-    await dp.start_polling(bot)
-
-if __name__ == "__main__":
-    asyncio.run(main())
