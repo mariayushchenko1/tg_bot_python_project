@@ -14,7 +14,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 # конфиг
-TOKEN = "8033118101:AAF5ayO6IBQ9xHOdpGTk5_eud9ZRfloZaug"  # ! сюда и в файле .env вставьте свой токен !
+TOKEN = "Ваш токен"  # ! сюда и в файле .env вставьте свой токен !
 DB_NAME = "sleep.db"
 user_states = {}
 
