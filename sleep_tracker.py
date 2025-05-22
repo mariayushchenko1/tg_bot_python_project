@@ -84,7 +84,6 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "Пожалуйста, выберите действие с клавиатуры.", reply_markup=back_kb
         )
 
-
 # отправка отчёта о сне
 async def send_report(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
