@@ -52,7 +52,8 @@ def day_to_num(day):
 # функция выполняется асинхронно
 async def start_workout(update: Update, context: ContextTypes.DEFAULT_TYPE):  # вызываетс при нажатии кнопки зарядка вГМ
     user_id = update.effective_user.id  # узнаем id пользователя
-    user_data[user_id] = WorkoutData()  # хранилище его данных
+    if user_id not in user_data:
+        user_data[user_id] = WorkoutData()
 
     await update.message.reply_text(  # асинхронно. Бот в ответ на соо пользователя присылает соо
         "Выберите дни для зарядки:",
