@@ -9,6 +9,7 @@ from telegram.ext import (
 )
 import sqlite3
 import datetime
+from main import START_KEYBOARD
 
 # Токен бота - вставьте сюда ваш токен!
 TOKEN = "ваш токен"
@@ -20,7 +21,7 @@ SET_MORNING, SET_EVENING = range(2)
 
 # клавиатура главного меню
 main_kb = ReplyKeyboardMarkup(
-    [["Регистрация сна", "Просмотреть отчёт"], ["Возврат в главное меню"]], resize_keyboard=True
+    [["Регистрация сна", "Просмотреть отчёт"], ["Возвращаемся в главное меню"]], resize_keyboard=True
 )
 
 back_kb = ReplyKeyboardMarkup(
@@ -34,6 +35,11 @@ async def start_sl(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Добро пожаловать в трекер сна!", reply_markup=main_kb
     )
 
+async def return_to_main_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "Возвращаемся в главное меню",
+        reply_markup=START_KEYBOARD
+    )
 
 # обработка начала регистрации сна
 async def handle_sleep(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -55,8 +61,8 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if text == "Назад":
         return await start_sl(update, context)
 
-    if text == "Возврат в главное меню":
-        return await start(update, context)
+    if text == "Возвращаемся в главное меню":
+        return await return_to_main_menu(update, context)
 
     state = user_states.get(user_id)
     if state:
