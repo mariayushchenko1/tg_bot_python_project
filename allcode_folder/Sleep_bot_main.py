@@ -14,11 +14,11 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 # конфиг
-TOKEN = "Ваш токен"  # ! сюда и в файле .env вставьте свой токен !
+TOKEN = "Ваш токен"  # ! сюда вставьте свой токен !
 DB_NAME = "sleep.db"
 user_states = {}
 
-# Клавиатуры
+# клавиатуры
 main_menu_kb = ReplyKeyboardMarkup(
     [["Регистрация сна", "Посмотреть отчёт"], ["Помощь"]],
     resize_keyboard=True,
@@ -211,7 +211,7 @@ def get_sleep_duration(user_id, date):
         return None
 
 
-# Обработка неизвестных команд
+# обработка неизвестных команд
 async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "Я не понимаю эту команду. Используйте кнопки меню.", reply_markup=main_menu_kb
